@@ -3,6 +3,8 @@ var i = 0;
 var n = 0;
 a = new Array();
 
+// funzione per lo scorrimento delle immagini
+
 $(document).ready(function() {
      
   
