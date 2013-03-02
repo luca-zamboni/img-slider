@@ -4,6 +4,19 @@ var n = 0;
 a = new Array();
 
 // funzione per lo scorrimento delle immagini
+/**
+
+La funzione anima prende in inpt un array di json
+I json devono essere composti cosi :
+id -  id dell' immagine da far muovere
+dir - direzione true dall alto verso il basso
+part - il punto di partenza
+arr - il punto di arrivo
+vel - la velocita con cui la foto deve sostarsi in millisecondi
+fade - la velocita in millisecondi con cui deve apparirae a foto
+stop - il tempo in millisecondi per cui la foto cìdeve stare ferma alla fine dell'animazione
+
+**/
 
 $(document).ready(function() {
      
