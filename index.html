@@ -1,0 +1,43 @@
+<html>
+	<head>
+
+		<link rel="stylesheet" type="text/css" href="css/stili.css" />
+
+		<!-- include jquery -->
+		<script src="./js/jquery.js" type="text/javascript"></script>
+
+	    <script type="text/javascript" src="./script.js"></script>
+	    <script type="text/javascript">
+
+	    	/// initializze on your container
+	    	$(document).ready(function() {
+				$("#sliderwrapper").imgSlider(1100,480);
+			});
+	    </script>
+
+	    <!-- Set style to your slider wrapper position:relative and overflow:hidden are required -->
+	    <style type="text/css">
+
+			#sliderwrapper {
+			  position: relative;
+			  border: solid 3px #660000;
+			  overflow: hidden;
+			  margin: 0 auto;
+			}
+
+	    </style>
+
+	</head>
+	<body>
+
+		<div id="sliderwrapper">
+		    <img src="img/tl.jpg" id="imma2" class="img" alt="" />
+		    <img src="img/logovaldisole.png" id="imma1" class="img" alt="" />
+		    <img src="img/trentino-logo.png" id="imma2" class="img" alt="" />
+		</div>
+		<div class="body">
+		Some stuff here
+		</div>
+
+	</body>
+</html>

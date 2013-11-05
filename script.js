@@ -1,9 +1,6 @@
 
 
-var i = 0;
-var n = 0;
-var b = 0;
-a = new Array();
+
 
 // funzione per lo scorrimento delle immagini
 /**
@@ -21,6 +18,11 @@ stop - il tempo in millisecondi per cui la foto cìdeve stare ferma alla fine de
 **/
 
 jQuery.fn.imgSlider = function(gw,gh){
+
+	var i = 0;
+	var n = 0;
+	var b = 0;
+	a = new Array();
 
 	$(this.selector).css("width",gw+"px");
 	$(this.selector).css("height",gh+"px");
@@ -63,82 +65,43 @@ jQuery.fn.imgSlider = function(gw,gh){
          	"vel" : 4000, "fade" : 200, "stop": 2000});
 		}
 		setta(id,neww,newh);
+
+		n = a.length;
+		  
+		anima(a[0]);
+
+		
+	}
+
+	function anima(json){  
+   
+		i++;
+		if(i>=n)
+		    i=0;
+		   
+		$(json.id).fadeIn(json.fade);
+		$(json.id).css("display","inline");
+		if(json.dir){
+		    $(json.id).css("marginTop",json.part);
+		    $(json.id).animate({
+		        marginTop : json.arr
+		    }, json.vel, function (){
+		        setTimeout("anima(a[i])",json.stop);
+		        $(json.id).delay(json.stop).fadeOut(0);
+		    });
+		}else{
+		    $(json.id).css("marginLeft",json.part);
+		    $(json.id).animate({
+		        marginLeft : json.arr
+		    }, json.vel, function (){
+		        setTimeout("anima(a[i])",json.stop);
+		        $(json.id).delay(json.stop).fadeOut(0);
+		    });
+		}
 	}
 }
 
-$(document).ready(function() {
 
-	$("#sliderwrapper").imgSlider(1100,480);
-	$(".element").hover(
-		function(){
-			$(this).children(".tendawrapper").children(".tenda").animate({
-				lineHeight: '40px'
-			},150);
-		},function(){
-			$(this).children(".tendawrapper").children(".tenda").animate({
-				lineHeight: '0px'
-			},100);
-		}
-	);
-
-	$(".tenda,.title").hover(
-	function(){
-	//$(this).children("a").animate({color:"#673b15"},100);
-		$(this).animate({
-			backgroundColor:"#cca674"
-		},100);
-	},function(){
-		//$(this).children("a").animate({color:"#fff"},50);
-		$(this).animate({
-			backgroundColor:"#956939"
-		},50);
-	});
-
-  /*$("#appa").mouseover(function(){
-    $("#tendaappa").css("visibility","visible");
-  });
-  $("#appa").mouseout(function(){
-    $("#tendaappa").css("visibility","hidden");
-  });*/
-
-
-  n = a.length;
-  
-  anima(a[0]);
-  
-      
-});
-
-function anima(json){  
-   
-  i++;
-  if(i>=n)
-      i=0;
-
-  console.log("kk");
-   
-  $(json.id).fadeIn(json.fade);
-  $(json.id).css("display","inline");
-  if(json.dir){
-     $(json.id).css("marginTop",json.part);
-     $(json.id).animate({
-         marginTop : json.arr
-     }, json.vel, function (){
-         setTimeout("anima(a[i])",json.stop);
-         $(json.id).delay(json.stop).fadeOut(0);
-     });
-  }else{
-     $(json.id).css("marginLeft",json.part);
-     $(json.id).animate({
-         marginLeft : json.arr
-     }, json.vel, function (){
-         setTimeout("anima(a[i])",json.stop);
-         $(json.id).delay(json.stop).fadeOut(0);
-     });
-  }
-   
-   
-}
 
 
 
