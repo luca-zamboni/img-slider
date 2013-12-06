@@ -1,21 +1,21 @@
 
 jQuery.fn.imgSlider = function(options){
 
-	fade = options.fade || 1000;
+	var fade = options.fade || 1000;
 
-	arr = 0;
+	var arr = 0;
 
-	gw = $(this).parent().width();
-	gh = $(this).parent().height();
+	var gw = $(this).parent().width();
+	var gh = $(this).parent().height();
 
 	$(this).css("width",gw+"px");
 	$(this).css("height",gh+"px");
-	grapp = gw/gh;
+	var grapp = gw/gh;
 
-	a = $(this).children();
+	var a = $(this).children();
 	a = Array.prototype.slice.call(a);
 
-	i=0;
+	var i=0;
 	anima();
 
 	function anima(){
@@ -27,7 +27,7 @@ jQuery.fn.imgSlider = function(options){
 
 		setta(obj);
 
-		$(obj).fadeIn(fade,sposta);
+		$(obj).fadeIn(this.fade,sposta);
 
 	}
 
@@ -44,7 +44,7 @@ jQuery.fn.imgSlider = function(options){
 	}
 
 	function callNext(){
-		$(obj).fadeOut(fade);
+		$(obj).fadeOut(this.fade);
 		anima();
 	}
 
