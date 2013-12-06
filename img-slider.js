@@ -1,9 +1,8 @@
 
 jQuery.fn.imgSlider = function(gw,gh){
 
-	vel = arguments[2].speed || 4000;
-	fade = arguments[2].intro || 200;
-	stop = arguments[2].stop || 2000;
+	fade = arguments[2].fade || 1000;
+
 	arr = "0px";
 
 	$(this).css("width",gw+"px");
@@ -25,7 +24,7 @@ jQuery.fn.imgSlider = function(gw,gh){
 
 		setta(obj);
 
-		$(obj).fadeIn(1000,sposta);
+		$(obj).fadeIn(fade,sposta);
 
 	}
 
@@ -42,7 +41,7 @@ jQuery.fn.imgSlider = function(gw,gh){
 	}
 
 	function callNext(){
-		$(obj).fadeOut(1000);
+		$(obj).fadeOut(fade);
 		anima();
 	}
 
