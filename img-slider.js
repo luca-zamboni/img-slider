@@ -1,9 +1,12 @@
 
-jQuery.fn.imgSlider = function(gw,gh){
+jQuery.fn.imgSlider = function(options){
 
-	fade = arguments[2].fade || 1000;
+	fade = options.fade || 1000;
 
 	arr = "0px";
+
+	gw = $(this).parent().width();
+	gh = $(this).parent().height();
 
 	$(this).css("width",gw+"px");
 	$(this).css("height",gh+"px");
