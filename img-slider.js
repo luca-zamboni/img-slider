@@ -3,19 +3,18 @@ jQuery.fn.imgSlider = function(options){
 
 	var fade = options.fade || 1000;
 
-	var arr = 0;
+	var a,neww,newh,grapp,ropp,part,gh,gw,arr = 0,i=0;
 
-	var gw = $(this).parent().width();
-	var gh = $(this).parent().height();
+	gw = $(this).parent().width();
+	gh = $(this).parent().height();
 
 	$(this).css("width",gw+"px");
 	$(this).css("height",gh+"px");
-	var grapp = gw/gh;
+	grapp = gw/gh;
 
-	var a = $(this).children();
+	a = $(this).children();
 	a = Array.prototype.slice.call(a);
 
-	var i=0;
 	anima();
 
 	function anima(){
