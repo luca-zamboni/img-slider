@@ -5,14 +5,13 @@ jQuery.fn.imgSlider = function(gw,gh){
 	fade = arguments[2].intro || 200;
 	stop = arguments[2].stop || 2000;
 	arr = "0px";
-	var i = 0;
-	var obj,dir;
 
 	$(this).css("width",gw+"px");
 	$(this).css("height",gh+"px");
-	var grapp = gw/gh;
+	grapp = gw/gh;
 
 	a = $(this).children();
+	a = Array.prototype.slice.call(a);
 
 	i=0;
 	anima();
@@ -34,11 +33,11 @@ jQuery.fn.imgSlider = function(gw,gh){
 		if(dir){
 		    $(obj).animate({
 		        marginTop : arr
-		    }, vel,callNext);
+		    }, obj.speed,callNext);
 		}else{
 		    $(obj).animate({
 		        marginLeft : arr
-		    }, vel,callNext);
+		    }, obj.speed,callNext);
 		}
 	}
 
@@ -67,6 +66,27 @@ jQuery.fn.imgSlider = function(gw,gh){
 		}
 		$(id).css("width",neww+"px");
 		$(id).css("height",newh+"px");
+		id.speed = getSpeed(id,w,h);
+	}
+
+	function getSpeed(id,w,h){
+		speed = -1;
+		classes = $(id).attr("class");
+		split = classes.split(" ");
+		split.forEach(function(e){
+			if(e.indexOf("speed") != -1){
+				speed = 1000 * parseInt(e.substring(5,e.length));
+			}
+		});
+		if(speed < 0 || isNaN(speed)){
+			if(dir){
+				speed = ( newh / gh ) * 2000;
+			}else{
+				speed = ( neww / gw ) * 2000;
+			}
+		}
+		console.log(speed);
+		return speed;
 	}
 }
 
