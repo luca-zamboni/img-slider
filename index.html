@@ -11,11 +11,9 @@
 
 	    <script type="text/javascript">
 
-	    	/// JS That start slider with specific time to fade. Default is 1000
+	    	/// JS That start slider with specific time to fade. Default is 1000. Min 1 ms
 	    	$(document).ready(function() {
-				$("#sliderwrapper").imgSlider({
-					fade: 500
-				});
+				$("#sliderwrapper").imgSlider();
 			});
 
 	    </script>
@@ -25,7 +23,7 @@
 			/* CSS of yur container */
 			#yourcontainer{
 				width: 1000px;
-				height: 300px;
+				height: 600px;
 				margin: 0 auto;
 				border: solid 3px #660000;
 			}
@@ -35,7 +33,7 @@
 	</head>
 	<body>
 
-		<!-- Conteiner of slider -->
+		<!-- Container of slider -->
 		<div id="yourcontainer">
 
 			<!--
@@ -44,14 +42,19 @@
 			-->
 			<div id="sliderwrapper">
 
-				<!-- All images must have img-slider class -->
+				<!-- 
+					All images must have img-slider class
+					Class speed[num] : set time of animation = (num * 1000)(ms) 
+					eg. this img require 5000ms to animate
+					Class stop[num] : set time of the stop before fade out after animation
+					Class i-stop[num] : set time of the stop before animation
+				    Class inv-dir : Invert direction of animation  
+			    -->
+
 			    <img src="img/img2.jpg" class="img-slider"/>
 
-				<!-- Class speed[num] : set time of animation = (num * 1000)(ms) 
-				eg. this img require 5000ms to animate-->
-			    <img src="img/tl.jpg" class="img-slider speed5"/>
+				<img src="img/img1.jpg" class="img-slider speed4 i-stop3 stop4"/>
 
-			    <!-- Class inv-dir : Invert direction of animation  -->
 			    <img src="img/img3.jpg" class="img-slider inv-dir"/>
 
 			</div>

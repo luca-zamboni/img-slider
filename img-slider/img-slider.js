@@ -1,7 +1,7 @@
 
 jQuery.fn.imgSlider = function(options){
 
-	var fade = options.fade || 1000;
+	var fade = 1000;
 
 	var a,neww,newh,grapp,ropp,part,gh,gw,arr = 0,i=0;
 
@@ -19,14 +19,12 @@ jQuery.fn.imgSlider = function(options){
 
 	function anima(){
 		obj = a[i];
-		i++;
-		if(i>=a.length){
-		    i=0;
-		}
 
 		setta(obj);
 
-		$(obj).fadeIn(this.fade,sposta);
+		$(obj).fadeIn(fade,function(){
+			setTimeout(sposta,getInitStop(obj));
+		});
 
 	}
 
@@ -34,16 +32,25 @@ jQuery.fn.imgSlider = function(options){
 		if(dir){
 		    $(obj).animate({
 		        marginTop : arr + "px"
-		    }, obj.speed,callNext);
+		    }, obj.speed,function(){
+		    	setTimeout(callNext,getStop(obj));
+		    });
 		}else{
 		    $(obj).animate({
 		        marginLeft : arr + "px"
-		    }, obj.speed,callNext);
+		    }, obj.speed,function(){
+		    	setTimeout(callNext,getStop(obj));
+		    });
 		}
 	}
 
 	function callNext(){
-		$(obj).fadeOut(this.fade);
+		i++;
+		if(i>=a.length){
+		    i=0;
+		}
+
+		$(obj).fadeOut(fade);
 		anima();
 	}
 
@@ -80,6 +87,22 @@ jQuery.fn.imgSlider = function(options){
 		$(id).css("width",neww+"px");
 		$(id).css("height",newh+"px");
 		id.speed = getSpeed(id,w,h);
+	}
+
+	function getInitStop(id){
+		istop = 1000*getNumFromClass(id,"i-stop");
+		if(istop < 0 || isNaN(istop)){
+			istop = 1000;
+		}
+		return istop;
+	}
+
+	function getStop(id){
+		stop = 1000*getNumFromClass(id,"stop");
+		if(stop < 0 || isNaN(stop)){
+			stop = 1000;
+		}
+		return stop;
 	}
 
 	function getSpeed(id){
