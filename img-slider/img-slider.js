@@ -24,6 +24,7 @@ jQuery.fn.imgSlider = function(options){
 	a.reverse();
 
 	obj = a[i];
+	i++;
 	j=false;
 
 	$(obj).fadeIn(0,function(){
@@ -42,6 +43,8 @@ jQuery.fn.imgSlider = function(options){
 		j = true;
 
 		obj = a[i];
+
+		setta(obj);
 
 		$(lobj).fadeOut(fade);
 		$(obj).fadeIn(fade/2,function(){
