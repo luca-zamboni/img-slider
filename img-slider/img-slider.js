@@ -3,7 +3,7 @@ jQuery.fn.imgSlider = function(options){
 
 	var fade = 1000;
 
-	var a,neww,newh,grapp,ropp,part,gh,gw,arr = 0,i=0;
+	var a,neww,newh,grapp,ropp,part,gh,gw,arr = 0,i=0,lobj,j;
 
 	gw = $(this).parent().width();
 	gh = $(this).parent().height();
@@ -15,73 +15,87 @@ jQuery.fn.imgSlider = function(options){
 	a = $(this).children();
 	a = Array.prototype.slice.call(a);
 
-	anima();
+	a.reverse().forEach(function(e){
+		$(e).on('load', function(){
+			console.log($(e).width());
+			setta(e);
+		});
+		$(e).fadeOut(0);
+	});
+	a.reverse();
+
+	obj = a[i];
+	j=false;
+
+	$(obj).fadeIn(0,function(){
+		setTimeout(sposta,getInitStop(obj));
+	});
 
 	function anima(){
+
+		if(j){
+			i++;
+			if(i>=a.length){
+			    i=0;
+			}
+			lobj = obj;
+		}
+		j = true;
+
 		obj = a[i];
 
-		setta(obj);
-
-		$(obj).fadeIn(fade,function(){
+		$(lobj).fadeOut(fade);
+		$(obj).fadeIn(fade/2,function(){
 			setTimeout(sposta,getInitStop(obj));
 		});
-
+		
+		
 	}
 
 	function sposta(){
-		if(dir){
+		if(obj.dire){
 		    $(obj).animate({
-		        marginTop : arr + "px"
+		        marginTop : obj.arr + "px"
 		    }, obj.speed,function(){
-		    	setTimeout(callNext,getStop(obj));
+		    	setTimeout(anima,getStop(obj));
 		    });
 		}else{
 		    $(obj).animate({
-		        marginLeft : arr + "px"
+		        marginLeft : obj.arr + "px"
 		    }, obj.speed,function(){
-		    	setTimeout(callNext,getStop(obj));
+		    	setTimeout(anima,getStop(obj));
 		    });
 		}
-	}
-
-	function callNext(){
-		i++;
-		if(i>=a.length){
-		    i=0;
-		}
-
-		$(obj).fadeOut(fade);
-		anima();
 	}
 
 	function setta(id){
 		w = $(id).width();
 		h = $(id).height();
 		rapp = w/h;
-		dir = rapp < grapp;
-		if(dir){
+		id.dire = rapp < grapp;
+		if(id.dire){
 			ropp = gw / w;
 			neww = gw;
 			newh = h * ropp;
 			part = (gh-newh);
-			if(getDir(obj)){
-				$(obj).css("marginTop",part);
-				arr = 0;
+			if(getDir(id)){
+				$(id).css("marginTop",part+"px");
+				id.arr = 0;
 			}else{
-				arr = part
-				$(obj).css("marginTop",0 + "px");
+				id.arr = part
+				$(id).css("marginTop",0 + "px");
 			}
 		}else{
 			ropp = gh / h;
 			newh = gh;
 			neww = w * ropp;
 			part = (gw-neww);
-			if(getDir(obj)){
-		    	$(obj).css("marginLeft",part);
-		    	arr = 0;
+			if(getDir(id)){
+		    	$(id).css("marginLeft",part+"px");
+		    	id.arr = 0;
 			}else{
-				arr = part
-				$(obj).css("marginLeft",0 + "px");
+				id.arr = part
+				$(id).css("marginLeft",0 + "px");
 			}
 		}
 		$(id).css("width",neww+"px");
@@ -108,7 +122,7 @@ jQuery.fn.imgSlider = function(options){
 	function getSpeed(id){
 		speed = 1000*getNumFromClass(id,"speed");
 		if(speed < 0 || isNaN(speed)){
-			if(dir){
+			if(id.dire){
 				speed = ( newh / gh ) * 2000;
 			}else{
 				speed = ( neww / gw ) * 2000;
