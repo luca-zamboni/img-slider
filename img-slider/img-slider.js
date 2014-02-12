@@ -17,7 +17,6 @@ jQuery.fn.imgSlider = function(options){
 
 	a.reverse().forEach(function(e){
 		$(e).on('load', function(){
-			console.log($(e).width());
 			setta(e);
 		});
 		$(e).fadeOut(0);
