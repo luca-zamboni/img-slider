@@ -18,10 +18,7 @@ jQuery.fn.imgSlider = function(options){
 
 		gw = $(current).width();
 		gh = $(current).height();
-			console.log(gw);
 
-		/*$(current).css("width",gw+"px");
-		$(current).css("height",gh+"px");*/
 		grapp = gw/gh;
 
 		a = $(current).children();
